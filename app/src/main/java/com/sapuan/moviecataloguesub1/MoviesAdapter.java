@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,13 +15,13 @@ public class MoviesAdapter extends BaseAdapter {
     private final Context context;
     private ArrayList<Movies> listMovies;
 
-    public void setMovies(ArrayList<Movies> listMovies) {
-        this.listMovies = listMovies;
-    }
-
-    public MoviesAdapter(Context context) {
+    MoviesAdapter(Context context) {
         this.context = context;
         listMovies = new ArrayList<>();
+    }
+
+    void setMovies(ArrayList<Movies> listMovies) {
+        this.listMovies = listMovies;
     }
 
     @Override
@@ -51,7 +50,6 @@ public class MoviesAdapter extends BaseAdapter {
         TextView tv_tglRilis = view.findViewById(R.id.tgl_rilis);
         TextView tv_genre = view.findViewById(R.id.genre_movies);
         TextView tv_rate = view.findViewById(R.id.rate);
-        RatingBar ratingVote = view.findViewById(R.id.rating_vote);
 
         Movies movies = (Movies) getItem(position);
         img_poster.setImageResource(movies.getPosterMovie());
@@ -59,7 +57,6 @@ public class MoviesAdapter extends BaseAdapter {
         tv_tglRilis.setText(movies.getTglRilis());
         tv_genre.setText(movies.getGenre());
         tv_rate.setText(movies.getRate());
-        ratingVote.setRating((int) (movies.getVoting()/2));
 
         return view;
     }

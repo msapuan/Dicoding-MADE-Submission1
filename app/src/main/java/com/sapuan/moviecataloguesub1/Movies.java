@@ -4,6 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Movies implements Parcelable {
+    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(Parcel source) {
+            return new Movies(source);
+        }
+
+        @Override
+        public Movies[] newArray(int size) {
+            return new Movies[size];
+        }
+    };
     private String judul;
     private String tglRilis;
     private String durasi;
@@ -11,7 +22,20 @@ public class Movies implements Parcelable {
     private String sinopsis;
     private String rate;
     private int posterMovie, backPoster;
-    private float voting;
+
+    public Movies() {
+    }
+
+    protected Movies(Parcel in) {
+        this.judul = in.readString();
+        this.tglRilis = in.readString();
+        this.durasi = in.readString();
+        this.genre = in.readString();
+        this.sinopsis = in.readString();
+        this.rate = in.readString();
+        this.posterMovie = in.readInt();
+        this.backPoster = in.readInt();
+    }
 
     public String getJudul() {
         return judul;
@@ -77,15 +101,6 @@ public class Movies implements Parcelable {
         this.backPoster = backPoster;
     }
 
-    public float getVoting() {
-        return voting;
-    }
-
-    public void setVoting(float voting) {
-        this.voting = voting;
-    }
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -101,33 +116,5 @@ public class Movies implements Parcelable {
         dest.writeString(this.rate);
         dest.writeInt(this.posterMovie);
         dest.writeInt(this.backPoster);
-        dest.writeFloat(this.voting);
     }
-
-    public Movies() {
-    }
-
-    protected Movies(Parcel in) {
-        this.judul = in.readString();
-        this.tglRilis = in.readString();
-        this.durasi = in.readString();
-        this.genre = in.readString();
-        this.sinopsis = in.readString();
-        this.rate = in.readString();
-        this.posterMovie = in.readInt();
-        this.backPoster = in.readInt();
-        this.voting = in.readFloat();
-    }
-
-    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
-        @Override
-        public Movies createFromParcel(Parcel source) {
-            return new Movies(source);
-        }
-
-        @Override
-        public Movies[] newArray(int size) {
-            return new Movies[size];
-        }
-    };
 }
